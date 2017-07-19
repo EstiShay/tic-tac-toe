@@ -16,13 +16,85 @@ Board.prototype.spaceCreation = function() {
   }
 };
 
-// Board.prototype.isWon = function(player) {
-//   spaceArray.forEach...
-//   if () {
-//
-//     }
-//   }
-// };
+Board.prototype.isWon = function(player) {
+  var playedSpaces = [];
+  this.spaceArray.forEach(function(aSpace) {
+    if (aSpace.player === 'X') {
+      playedSpaces.push(aSpace);
+    }
+  });
+
+  var evalXCoordinates = [];
+  var evalYCoordinates = [];
+  gameOver = false;
+  playedSpaces.forEach(function(aCoord) {
+    evalXCoordinates.push(aCoord.xCoordinate);
+  });
+  var z = 0;
+  var u = 0;
+  var d = 0;
+
+  for (var i = 0; i < playedSpaces.length; i += 1) {
+    if (evalXCoordinates[i] === 0) {
+      z += 1;
+    } else if (evalXCoordinates[i] === 1) {
+      u += 1;
+    } else if (evalXCoordinates[i] === 2) {
+      d += 1;
+    }
+  }
+  if (z === 3 || u === 3 || d === 3) {
+    gameOver = true;
+    alert("game over");
+  }
+
+  playedSpaces.forEach(function(aCoord) {
+    evalYCoordinates.push(aCoord.yCoordinate);
+  });
+
+  var z = 0;
+  var u = 0;
+  var d = 0;
+  for (var i = 0; i < playedSpaces.length; i += 1) {
+    if (evalYCoordinates[i] === 0) {
+      ++z;
+    } else if (evalYCoordinates[i] === 1) {
+      u+= 1;
+    } else if (evalYCoordinates[i] === 2) {
+      d += 1;
+    }
+  }
+  if (z === 3 || u === 3 || d === 3) {
+    gameOver = true;
+    alert("game over");
+  }
+
+  var match = 0;
+  for (var i = 0; i < playedSpaces.length; i += 1){
+    if (playedSpaces[i].xCoordinate === playedSpaces[i].yCoordinate) {
+      match += 1;
+    }
+  }
+  if (match === 3) {
+    alert("game over");
+    gameOver = true;
+  }
+
+  var sum = 0;
+  for (var i = 0; i < playedSpaces.length; i += 1){
+    if (playedSpaces[i].xCoordinate + playedSpaces[i].yCoordinate === 2) {
+      sum += 1;
+    }
+  }
+  if (sum === 3) {
+    alert("game over");
+    gameOver = true;
+  }
+
+
+
+  // return playedSpaces
+};
 
 function Space(x,y,cell) {
   this.xCoordinate = x;
@@ -48,8 +120,9 @@ $(document).ready(function () {
         ourBoard.spaceArray[i].player = 'X';
       }
     }
-    console.log(ourBoard.spaceArray);
-
     // alert(this.id);
-  })
+
+    ourBoard.isWon();
+
+  });
 });
