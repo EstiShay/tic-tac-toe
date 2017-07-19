@@ -3,10 +3,20 @@ function Player(mark) {
   this.mark = mark;
 }
 
+//Create Board constructor to hold Space objects
 function Board() {
   this.spaceArray = [];
 }
 
+//Create Space constructor with X and Y coordinates, the cell name matching the div's cell id, and the player who had clicked that space
+function Space(x,y,cell) {
+  this.xCoordinate = x;
+  this.yCoordinate = y;
+  this.cell = cell;
+  this.player = '';
+}
+
+//Creates spaces using the Space constructor and pushes them to the array in the Board constructor
 Board.prototype.spaceCreation = function() {
   for (var i = 0; i < 3 ; i++) {
     for (var j = 0; j < 3; j++) {
@@ -16,6 +26,7 @@ Board.prototype.spaceCreation = function() {
   }
 };
 
+//Evaluates whether this play is the winning play
 Board.prototype.isWon = function(player) {
   var playedSpaces = [];
   this.spaceArray.forEach(function(aSpace) {
@@ -27,13 +38,14 @@ Board.prototype.isWon = function(player) {
   var evalXCoordinates = [];
   var evalYCoordinates = [];
   gameOver = false;
+
+  //Check for winning combo on X axis
   playedSpaces.forEach(function(aCoord) {
     evalXCoordinates.push(aCoord.xCoordinate);
   });
   var z = 0;
   var u = 0;
   var d = 0;
-
   for (var i = 0; i < playedSpaces.length; i += 1) {
     if (evalXCoordinates[i] === 0) {
       z += 1;
@@ -47,11 +59,10 @@ Board.prototype.isWon = function(player) {
     gameOver = true;
     alert("game over");
   }
-
+  //Check for winning combo on Y axis
   playedSpaces.forEach(function(aCoord) {
     evalYCoordinates.push(aCoord.yCoordinate);
   });
-
   var z = 0;
   var u = 0;
   var d = 0;
@@ -68,7 +79,7 @@ Board.prototype.isWon = function(player) {
     gameOver = true;
     alert("game over");
   }
-
+  //Check for diagonal: \ (back slant)
   var match = 0;
   for (var i = 0; i < playedSpaces.length; i += 1){
     if (playedSpaces[i].xCoordinate === playedSpaces[i].yCoordinate) {
@@ -79,7 +90,7 @@ Board.prototype.isWon = function(player) {
     alert("game over");
     gameOver = true;
   }
-
+  //Check for diagonal: / (forward slant)
   var sum = 0;
   for (var i = 0; i < playedSpaces.length; i += 1){
     if (playedSpaces[i].xCoordinate + playedSpaces[i].yCoordinate === 2) {
@@ -90,18 +101,7 @@ Board.prototype.isWon = function(player) {
     alert("game over");
     gameOver = true;
   }
-
-
-
-  // return playedSpaces
 };
-
-function Space(x,y,cell) {
-  this.xCoordinate = x;
-  this.yCoordinate = y;
-  this.cell = cell;
-  this.player = '';
-}
 
 
 
@@ -120,7 +120,6 @@ $(document).ready(function () {
         ourBoard.spaceArray[i].player = 'X';
       }
     }
-    // alert(this.id);
 
     ourBoard.isWon();
 

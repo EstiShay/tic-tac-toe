@@ -18,6 +18,8 @@ This program will play tic-tac-toe...
 
 | Behavior      | Example Input         | Example Output        |
 | ------------- | ------------- | ------------- |
+| Create a player | Player X | X |
+| Create new game board| New board | [(0,0)...(2,2)]
 
 ## Technologies Used
 
