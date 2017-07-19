@@ -16,10 +16,19 @@ Board.prototype.spaceCreation = function() {
   }
 };
 
+Board.prototype.isWon = function(player) {
+  spaceArray.forEach...
+  if () {
+
+    }
+  }
+};
+
 function Space(x,y,cell) {
   this.xCoordinate = x;
   this.yCoordinate = y;
   this.cell = cell;
+  this.player = 'X';
 }
 
 
@@ -28,5 +37,6 @@ function Space(x,y,cell) {
 $(document).ready(function () {
   $(".box").click(function() {
     $(this).text("X");
+    alert(this.id);
   })
 });
