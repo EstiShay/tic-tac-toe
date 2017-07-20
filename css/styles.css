@@ -68,11 +68,14 @@ html {
 .btn-lg {
   margin-top: 50px;
   margin-left: 37px;
+}
+
+.btn-info {
   background-color: #088adb;
 }
 
 .buttonboard div {
-    width: 200px;
+    width: 180px;
     height: 200px;
     float: left;
 }
@@ -98,4 +101,24 @@ h4 {
   line-height: 170px;
   text-shadow: -3px 0 black, 0 1px black, 1px 0 black, 0 1px black;
   font-size: 50px;
+}
+
+input {
+  width: 165px;
+}
+
+#newgame {
+  margin-left: 10px;
+}
+
+#computer-play {
+  margin-left: 0px;
+}
+
+#changegame {
+  margin-left: 20px;
+}
+
+#switchgame {
+  margin-left: 60px;
 }
