@@ -127,39 +127,52 @@ $(document).ready(function () {
 
   $(".box").click(function() {
     if (playerTurn === "X") {
-      $(this).text("X");
       for (var i = 0; i < ourBoard.spaceArray.length; i++) {
         if (ourBoard.spaceArray[i].cell === this.id) {
-          ourBoard.spaceArray[i].player = 'X';
+          if (ourBoard.spaceArray[i].player !== '') {
+            alert("That space has already been played. Pick a different space.");
+          } else {
+            $(this).text("X");
+            for (var i = 0; i < ourBoard.spaceArray.length; i++) {
+              if (ourBoard.spaceArray[i].cell === this.id) {
+                ourBoard.spaceArray[i].player = 'X';
+              }
+            }
+            var gameStatus = ourBoard.isWonX();
+            if (gameStatus === true) {
+              $("h3").append(" Player X won!")
+              $(".img").show();
+            } else {
+              playerTurn = "O";
+            }
+          }
         }
-      }
-      var gameStatus = ourBoard.isWonX();
-      if (gameStatus === true) {
-        // console.log("Player X won")
-        $("h3").append(" Player X won!")
-        $(".img").show();
-      } else {
-        playerTurn = "O";
       }
     } else if (playerTurn === "O") {
-      $(this).text("O");
       for (var i = 0; i < ourBoard.spaceArray.length; i++) {
         if (ourBoard.spaceArray[i].cell === this.id) {
-          ourBoard.spaceArray[i].player = 'O';
+          if (ourBoard.spaceArray[i].player !== '') {
+            alert("That space has already been played. Pick a different space.");
+          } else {
+            $(this).text("O");
+            for (var i = 0; i < ourBoard.spaceArray.length; i++) {
+              if (ourBoard.spaceArray[i].cell === this.id) {
+                ourBoard.spaceArray[i].player = 'O';
+              }
+            }
+            var gameStatus = ourBoard.isWonO();
+            if (gameStatus === true) {
+              // console.log("Player O won")
+              $("h3").append(" Player O won!")
+              $(".img").show();
+            } else {
+              playerTurn = "X";
+            }
+          }
         }
-      }
-      var gameStatus = ourBoard.isWonO();
-      if (gameStatus === true) {
-        // console.log("Player O won")
-        $("h3").append(" Player O won!")
-        $(".img").show();
-      } else {
-        playerTurn = "X";
       }
     } else {
       alert("error2");
     }
-
-
   });
 });
