@@ -6,7 +6,7 @@
 
 ## Description
 
-This program will create a 3x3 Tic-Tac-Toe board that can be played by two people.
+This program will create a 3x3 Tic-Tac-Toe board that can be played by two people, or one person against the computer.
 
 ## Setup/Installation Requirements
 
