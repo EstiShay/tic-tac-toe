@@ -34,9 +34,8 @@ Board.prototype.isWonX = function(player) {
       playedSpaces.push(aSpace);
     }
   });
-  checkPlay(playedSpaces);
+  return checkPlay(playedSpaces);
 };
-
 
 Board.prototype.isWonO = function(player) {
   var playedSpaces = [];
@@ -45,13 +44,14 @@ Board.prototype.isWonO = function(player) {
       playedSpaces.push(aSpace);
     }
   });
-  checkPlay(playedSpaces);
+  return checkPlay(playedSpaces);
+
 };
 
 function checkPlay(playedSpaces) {
   var evalXCoordinates = [];
   var evalYCoordinates = [];
-  gameOver = false;
+  var gameOver = false;
 
   //Check for winning combo on X axis
   playedSpaces.forEach(function(aCoord) {
@@ -71,7 +71,6 @@ function checkPlay(playedSpaces) {
   }
   if (z === 3 || u === 3 || d === 3) {
     gameOver = true;
-    alert("game over");
   }
   //Check for winning combo on Y axis
   playedSpaces.forEach(function(aCoord) {
@@ -91,7 +90,6 @@ function checkPlay(playedSpaces) {
   }
   if (z === 3 || u === 3 || d === 3) {
     gameOver = true;
-    alert("game over");
   }
   //Check for diagonal: \ (back slant)
   var match = 0;
@@ -101,7 +99,6 @@ function checkPlay(playedSpaces) {
     }
   }
   if (match === 3) {
-    alert("game over");
     gameOver = true;
   }
   //Check for diagonal: / (forward slant)
@@ -112,9 +109,9 @@ function checkPlay(playedSpaces) {
     }
   }
   if (sum === 3) {
-    alert("game over");
     gameOver = true;
   }
+  return gameOver;
 };
 
 
@@ -136,8 +133,13 @@ $(document).ready(function () {
           ourBoard.spaceArray[i].player = 'X';
         }
       }
-      ourBoard.isWonX();
-      playerTurn = "O";
+      var gameStatus = ourBoard.isWonX();
+      if (gameStatus === true) {
+        // console.log("Player X won")
+        $(".gameboard").hide();
+      } else {
+        playerTurn = "O";
+      }
     } else if (playerTurn === "O") {
       $(this).text("O");
       for (var i = 0; i < ourBoard.spaceArray.length; i++) {
@@ -145,8 +147,13 @@ $(document).ready(function () {
           ourBoard.spaceArray[i].player = 'O';
         }
       }
-      ourBoard.isWonO();
-      playerTurn = "X";
+      var gameStatus = ourBoard.isWonO();
+      if (gameStatus === true) {
+        // console.log("Player O won")
+        $(".gameboard").hide();
+      } else {
+        playerTurn = "X";
+      }
     } else {
       alert("error2");
     }
