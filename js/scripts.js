@@ -1,7 +1,4 @@
 //Business logic
-function Player(mark) {
-  this.mark = mark;
-}
 
 //Create Board constructor to hold Space objects
 function Board() {
@@ -121,8 +118,6 @@ $(document).ready(function () {
 
   var ourBoard = new Board();
   var boardArray = ourBoard.spaceCreation();
-  var playerX = new Player("X");
-  var playerO = new Player("O");
   var playerTurn = "X";
 
   $(".box").click(function() {
@@ -148,7 +143,7 @@ $(document).ready(function () {
           }
         }
       }
-    } else if (playerTurn === "O") {
+    } else {
       for (var i = 0; i < ourBoard.spaceArray.length; i++) {
         if (ourBoard.spaceArray[i].cell === this.id) {
           if (ourBoard.spaceArray[i].player !== '') {
@@ -170,8 +165,6 @@ $(document).ready(function () {
           }
         }
       }
-    } else {
-      alert("error2");
     }
   });
 });
