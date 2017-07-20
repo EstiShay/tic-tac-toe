@@ -13,6 +13,7 @@
 
       <div class="wrapper">
           <div class="gameboard">
+            <div class="img"><h3>Game Over!</h3></div>
               <div id="cell0/0" class="box"></div>
               <div id="cell0/1" class="leftright box"></div>
               <div id="cell0/2" class="box"></div>
@@ -23,10 +24,15 @@
               <div id="cell2/1" class="leftright box"></div>
               <div id="cell2/2" class="box"></div>
           </div>
+          <div class="buttonboard">
+            <div></div>
+            <div><input type="button" class="btn btn-info" value="New Game!" onClick="window.location.reload()"></div>
+            <div></div>
+          </div>
       </div>
 
 
-      <input type="button" class="btn btn-info" value="New Game!" onClick="window.location.reload()">
+
     </div>
   </body>
 </html>

@@ -14,7 +14,7 @@
     float: left;
 }
 .middle {
-    border: 1px solid;
+    border: 5px solid;
 }
 .button {
     background-color:white;
@@ -22,15 +22,49 @@
     margin:0 auto;
 }
 .updown {
-    border-top: 1px solid;
-    border-bottom: 1px solid;
+    border-top: 5px solid;
+    border-bottom: 5px solid;
 }
 .leftright {
-    border-left: 1px solid;
-    border-right: 1px solid;
+    border-left: 5px solid;
+    border-right: 5px solid;
 }
 
 .box {
   text-align: center;
-  font-size: 20px;
+  font-size: 30px;
+  vertical-align: middle;
+  line-height: 103px;
+}
+
+.gameboard .img {
+  display: none;
+  margin-bottom: 0px;
+  opacity: 0.6;
+  color: #fff;
+  background: #09a00c;
+  width: 310px;
+  height:310px;
+  background-size: cover;
+  overflow: hidden;
+  position:absolute;
+  z-index:1;
+}
+
+.btn {
+  margin-top: 50px;
+  margin-left: 4px;
+}
+
+.buttonboard div {
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+
+h3 {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 250px;
+  text-shadow: -3px 0 black, 0 1px black, 1px 0 black, 0 1px black;
 }
