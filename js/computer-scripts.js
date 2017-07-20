@@ -45,6 +45,7 @@ Board.prototype.isWonO = function(player) {
 
 };
 
+//
 function checkPlay(playedSpaces) {
   var evalXCoordinates = [];
   var evalYCoordinates = [];
@@ -120,6 +121,27 @@ function randomSpace() {
   return computerSelection;
 }
 
+//Computer generates random play and checks whether that space is open; if space is not open, then computer generates new random play
+function playComputer(ourBoard) {
+  var computerSpace = randomSpace();
+
+  for (var i = 0; i < ourBoard.spaceArray.length; i++) {
+    if (ourBoard.spaceArray[i].cell === computerSpace.cell) {
+      if (ourBoard.spaceArray[i].player === '') {
+        var playCell = "#" + computerSpace.cell;
+        $(String(playCell)).text("O");
+        for (var i = 0; i < ourBoard.spaceArray.length; i++) {
+          if (ourBoard.spaceArray[i].cell === computerSpace.cell) {
+            ourBoard.spaceArray[i].player = 'O';
+          }
+        }
+      } else {
+        playComputer(ourBoard);
+      }
+    }
+  }
+}
+
 
 //UI logic
 $(document).ready(function () {
@@ -153,29 +175,14 @@ $(document).ready(function () {
     }
   });
   $("#computer-play").click(function() {
-    var computerSpace = randomSpace();
 
-    for (var i = 0; i < ourBoard.spaceArray.length; i++) {
-      if (ourBoard.spaceArray[i].cell === computerSpace.cell) {
-        if (ourBoard.spaceArray[i].player !== '') {
-          alert("That space has already been played. Pick a different space.");
-        } else {
-          var playCell = "#" + computerSpace.cell;
-          $(String(playCell)).text("O");
-          for (var i = 0; i < ourBoard.spaceArray.length; i++) {
-            if (ourBoard.spaceArray[i].cell === computerSpace.cell) {
-              ourBoard.spaceArray[i].player = 'O';
-            }
-          }
-          var gameStatus = ourBoard.isWonO();
-          if (gameStatus === true) {
-            $("h4").append(" Player O won!");
-            $(".img").show();
-          } else {
-            playerTurn = "X";
-          }
-        }
-      }
+    playComputer(ourBoard);
+    var gameStatus = ourBoard.isWonO();
+    if (gameStatus === true) {
+      $("h4").append(" Player O won!");
+      $(".img").show();
+    } else {
+      playerTurn = "X";
     }
   });
 });
