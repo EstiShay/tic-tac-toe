@@ -27,14 +27,28 @@ Board.prototype.spaceCreation = function() {
 };
 
 //Evaluates whether this play is the winning play
-Board.prototype.isWon = function(player) {
+Board.prototype.isWonX = function(player) {
   var playedSpaces = [];
   this.spaceArray.forEach(function(aSpace) {
     if (aSpace.player === 'X') {
       playedSpaces.push(aSpace);
     }
   });
+  checkPlay(playedSpaces);
+};
 
+
+Board.prototype.isWonO = function(player) {
+  var playedSpaces = [];
+  this.spaceArray.forEach(function(aSpace) {
+    if (aSpace.player === 'O') {
+      playedSpaces.push(aSpace);
+    }
+  });
+  checkPlay(playedSpaces);
+};
+
+function checkPlay(playedSpaces) {
   var evalXCoordinates = [];
   var evalYCoordinates = [];
   gameOver = false;
@@ -110,18 +124,33 @@ $(document).ready(function () {
 
   var ourBoard = new Board();
   var boardArray = ourBoard.spaceCreation();
+  var playerX = new Player("X");
+  var playerO = new Player("O");
+  var playerTurn = "X";
 
   $(".box").click(function() {
-
-    $(this).text("X");
-
-    for (var i = 0; i < ourBoard.spaceArray.length; i++) {
-      if (ourBoard.spaceArray[i].cell === this.id) {
-        ourBoard.spaceArray[i].player = 'X';
+    if (playerTurn === "X") {
+      $(this).text("X");
+      for (var i = 0; i < ourBoard.spaceArray.length; i++) {
+        if (ourBoard.spaceArray[i].cell === this.id) {
+          ourBoard.spaceArray[i].player = 'X';
+        }
       }
+      ourBoard.isWonX();
+      playerTurn = "O";
+    } else if (playerTurn === "O") {
+      $(this).text("O");
+      for (var i = 0; i < ourBoard.spaceArray.length; i++) {
+        if (ourBoard.spaceArray[i].cell === this.id) {
+          ourBoard.spaceArray[i].player = 'O';
+        }
+      }
+      ourBoard.isWonO();
+      playerTurn = "X";
+    } else {
+      alert("error2");
     }
 
-    ourBoard.isWon();
 
   });
 });
