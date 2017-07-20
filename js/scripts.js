@@ -140,7 +140,7 @@ $(document).ready(function () {
             }
             var gameStatus = ourBoard.isWonX();
             if (gameStatus === true) {
-              $("h3").append(" Player X won!")
+              $("h4").append(" Player X won!")
               $(".img").show();
             } else {
               playerTurn = "O";
@@ -162,8 +162,7 @@ $(document).ready(function () {
             }
             var gameStatus = ourBoard.isWonO();
             if (gameStatus === true) {
-              // console.log("Player O won")
-              $("h3").append(" Player O won!")
+              $("h4").append(" Player O won!")
               $(".img").show();
             } else {
               playerTurn = "X";
